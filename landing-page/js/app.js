@@ -22,23 +22,8 @@
  * Define Global Variables
  * 
 */
-
 let navList = document.getElementById('navbar__list');
 let sections = document.querySelectorAll('section');
-
-/**
- * End Global Variables
- * Start Helper Functions
- * 
-*/
-
-
-
-/**
- * End Helper Functions
- * Begin Main Functions
- * 
-*/
 
 // build the nav
 /*
@@ -90,8 +75,6 @@ function removeActiveClass(sec) {
     document.querySelector(`#${id}`).classList.remove('active')
 }
 
-// Scroll to anchor ID using scrollTO event
-
 /**
  * End Main Functions
  * Begin Events
@@ -102,8 +85,14 @@ function removeActiveClass(sec) {
 buildNav();
 
 // Scroll to section on link click
+navList.addEventListener('click', e => {
+    e.preventDefault();
+    // console.log(e.target)
+    for (let sec of sections) {
+        if (e.target.outerText === sec.attributes['data-nav'].nodeValue)
+            sec.scrollIntoView({behavior: 'smooth', block: 'end', inline: 'nearest'});
+    }
+})
 
 // Set sections as active
 document.addEventListener('scroll', dealWithActiveClass);
-
-
